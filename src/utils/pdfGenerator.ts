@@ -12,9 +12,9 @@ export const generatePDF = async (resumeData: FresherResumeData | ExperiencedRes
     }
 
     // Use dynamic import for html2canvas and jsPDF to reduce bundle size
-    const [html2canvas, jsPDF] = await Promise.all([
-      import('html2canvas').then(module => module.default),
-      import('jspdf').then(module => module.jsPDF)
+    const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+      import('html2canvas'),
+      import('jspdf')
     ]);
 
     // Generate canvas from the resume preview
