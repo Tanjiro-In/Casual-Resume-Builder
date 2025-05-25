@@ -69,6 +69,10 @@ const FresherBuilder = () => {
     certifications: [],
   });
 
+  const handleResumeChange = (data: any) => {
+    setResumeData(data);
+  };
+
   const handleSave = () => {
     localStorage.setItem("fresher-resume", JSON.stringify(resumeData));
     toast({
@@ -120,7 +124,7 @@ const FresherBuilder = () => {
           <div className="space-y-6">
             <ResumeForm 
               resumeData={resumeData} 
-              setResumeData={setResumeData}
+              onChange={handleResumeChange}
               type="fresher"
             />
           </div>
