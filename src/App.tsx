@@ -8,7 +8,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Index from "./pages/Index";
 import FresherBuilder from "./pages/FresherBuilder";
 import ExperiencedBuilder from "./pages/ExperiencedBuilder";
-import Templates from "./pages/Templates";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,7 +23,6 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/fresher" element={<FresherBuilder />} />
             <Route path="/experienced" element={<ExperiencedBuilder />} />
-            <Route path="/templates" element={<Templates />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { ExperiencedResumeForm } from "@/components/resume/ExperiencedResumeForm";
 import { ResumePreview } from "@/components/resume/ResumePreview";
 import { Button } from "@/components/ui/button";
-import { Download, Save, Copy, BarChart3 } from "lucide-react";
+import { Download, BarChart3 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { generatePDF } from "@/utils/pdfGenerator";
 import { ATSScore } from "@/components/resume/ATSScore";
@@ -71,14 +70,6 @@ const ExperiencedBuilder = () => {
     publications: [],
   });
 
-  const handleSave = () => {
-    localStorage.setItem("experienced-resume", JSON.stringify(resumeData));
-    toast({
-      title: "Resume Saved",
-      description: "Your resume has been saved successfully!",
-    });
-  };
-
   const handleDownload = async () => {
     try {
       await generatePDF(resumeData, "experienced");
@@ -95,16 +86,6 @@ const ExperiencedBuilder = () => {
     }
   };
 
-  const handleDuplicate = () => {
-    const duplicatedData = { ...resumeData };
-    duplicatedData.personalInfo.fullName = `${duplicatedData.personalInfo.fullName} (Copy)`;
-    setResumeData(duplicatedData);
-    toast({
-      title: "Resume Duplicated",
-      description: "Your resume has been duplicated successfully!",
-    });
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
@@ -118,14 +99,6 @@ const ExperiencedBuilder = () => {
         </div>
 
         <div className="flex justify-center mb-6 space-x-4 flex-wrap gap-2">
-          <Button onClick={handleSave} variant="outline">
-            <Save className="mr-2 h-4 w-4" />
-            Save Resume
-          </Button>
-          <Button onClick={handleDuplicate} variant="outline">
-            <Copy className="mr-2 h-4 w-4" />
-            Duplicate
-          </Button>
           <Button onClick={() => setShowATSScore(!showATSScore)} variant="outline">
             <BarChart3 className="mr-2 h-4 w-4" />
             ATS Score

@@ -4,7 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { ResumeForm } from "@/components/resume/ResumeForm";
 import { ResumePreview } from "@/components/resume/ResumePreview";
 import { Button } from "@/components/ui/button";
-import { Download, Save } from "lucide-react";
+import { Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { generatePDF } from "@/utils/pdfGenerator";
 
@@ -73,14 +73,6 @@ const FresherBuilder = () => {
     setResumeData(data);
   };
 
-  const handleSave = () => {
-    localStorage.setItem("fresher-resume", JSON.stringify(resumeData));
-    toast({
-      title: "Resume Saved",
-      description: "Your resume has been saved successfully!",
-    });
-  };
-
   const handleDownload = async () => {
     try {
       await generatePDF(resumeData, "fresher");
@@ -109,11 +101,7 @@ const FresherBuilder = () => {
           </p>
         </div>
 
-        <div className="flex justify-center mb-6 space-x-4">
-          <Button onClick={handleSave} variant="outline">
-            <Save className="mr-2 h-4 w-4" />
-            Save Resume
-          </Button>
+        <div className="flex justify-center mb-6">
           <Button onClick={handleDownload}>
             <Download className="mr-2 h-4 w-4" />
             Download PDF

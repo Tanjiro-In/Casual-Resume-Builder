@@ -19,9 +19,6 @@ export function Header() {
           </Link>
           
           <nav className="hidden md:flex items-center space-x-6">
-            <Link to="/templates" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">
-              Templates
-            </Link>
             <Link to="/fresher" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">
               Fresher
             </Link>

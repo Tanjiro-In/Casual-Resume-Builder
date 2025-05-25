@@ -1,6 +1,8 @@
+
 import React from "react";
 import { PersonalInfoForm } from "./forms/PersonalInfoForm";
 import { EducationForm } from "./forms/EducationForm";
+import { InternshipsForm } from "./forms/InternshipsForm";
 import { SkillsForm } from "./forms/SkillsForm";
 import { CertificationsForm } from "./forms/CertificationsForm";
 
@@ -25,6 +27,13 @@ interface Skills {
   soft: string[];
 }
 
+interface Internship {
+  company: string;
+  position: string;
+  duration: string;
+  description: string;
+}
+
 interface Certification {
   name: string;
   issuer: string;
@@ -35,6 +44,7 @@ interface ResumeData {
   personalInfo: PersonalInfo;
   education: Education[];
   skills: Skills;
+  internships: Internship[];
   certifications: Certification[];
 }
 
@@ -54,12 +64,15 @@ export function ResumeForm({
   };
 
   const updateEducation = (education: Education[]) => {
-    // Ensure gpa field is always present for the form component
     const normalizedEducation = education.map(edu => ({
       ...edu,
       gpa: edu.gpa || ""
     }));
     onChange({ ...resumeData, education: normalizedEducation });
+  };
+
+  const updateInternships = (internships: Internship[]) => {
+    onChange({ ...resumeData, internships });
   };
 
   const updateSkills = (skills: Skills) => {
@@ -83,6 +96,11 @@ export function ResumeForm({
           gpa: edu.gpa || ""
         }))}
         onChange={updateEducation}
+      />
+
+      <InternshipsForm
+        internships={resumeData.internships}
+        onChange={updateInternships}
       />
       
       <SkillsForm
