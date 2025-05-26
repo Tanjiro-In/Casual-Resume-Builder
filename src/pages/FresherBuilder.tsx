@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { ResumeForm } from "@/components/resume/ResumeForm";
-import { ResumePreview } from "@/components/resume/ResumePreview";
+import { CustomizableResumePreview } from "@/components/resume/CustomizableResumePreview";
+import { TemplateCustomizer, TemplateCustomization } from "@/components/resume/TemplateCustomizer";
 import { Button } from "@/components/ui/button";
-import { Download, ArrowRight } from "lucide-react";
+import { Download, ArrowRight, Palette } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { generatePDF } from "@/utils/pdfGenerator";
 import { useNavigate } from "react-router-dom";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export interface FresherResumeData {
   personalInfo: {
@@ -71,6 +73,15 @@ const FresherBuilder = () => {
     certifications: [],
   });
 
+  const [customization, setCustomization] = useState<TemplateCustomization>({
+    style: "modern",
+    font: "inter",
+    sectionOrder: ["personalInfo", "objective", "education", "projects", "internships", "skills", "certifications"],
+    accentColor: "#2563eb",
+  });
+
+  const availableSections = ["personalInfo", "objective", "education", "projects", "internships", "skills", "certifications"];
+
   const handleResumeChange = (data: any) => {
     setResumeData(data);
   };
@@ -118,17 +129,41 @@ const FresherBuilder = () => {
           </Button>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            <ResumeForm 
-              resumeData={resumeData} 
-              onChange={handleResumeChange}
-              type="fresher"
-            />
+        <div className="grid lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-1 space-y-6">
+            <Tabs defaultValue="content" className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="content">Content</TabsTrigger>
+                <TabsTrigger value="design">
+                  <Palette className="w-4 h-4 mr-1" />
+                  Design
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="content" className="space-y-6">
+                <ResumeForm 
+                  resumeData={resumeData} 
+                  onChange={handleResumeChange}
+                  type="fresher"
+                />
+              </TabsContent>
+              
+              <TabsContent value="design">
+                <TemplateCustomizer
+                  customization={customization}
+                  onChange={setCustomization}
+                  availableSections={availableSections}
+                />
+              </TabsContent>
+            </Tabs>
           </div>
           
-          <div className="lg:sticky lg:top-24 h-fit">
-            <ResumePreview resumeData={resumeData} type="fresher" />
+          <div className="lg:col-span-2 lg:sticky lg:top-24 h-fit">
+            <CustomizableResumePreview 
+              resumeData={resumeData} 
+              type="fresher" 
+              customization={customization}
+            />
           </div>
         </div>
       </div>

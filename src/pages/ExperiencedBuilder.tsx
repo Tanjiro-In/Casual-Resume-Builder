@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { ExperiencedResumeForm } from "@/components/resume/ExperiencedResumeForm";
-import { ResumePreview } from "@/components/resume/ResumePreview";
+import { CustomizableResumePreview } from "@/components/resume/CustomizableResumePreview";
+import { TemplateCustomizer, TemplateCustomization } from "@/components/resume/TemplateCustomizer";
 import { Button } from "@/components/ui/button";
-import { Download, BarChart3, ArrowLeft } from "lucide-react";
+import { Download, BarChart3, ArrowLeft, Palette } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { generatePDF } from "@/utils/pdfGenerator";
 import { ATSScore } from "@/components/resume/ATSScore";
 import { useNavigate } from "react-router-dom";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export interface ExperiencedResumeData {
   personalInfo: {
@@ -72,6 +74,15 @@ const ExperiencedBuilder = () => {
     publications: [],
   });
 
+  const [customization, setCustomization] = useState<TemplateCustomization>({
+    style: "modern",
+    font: "inter",
+    sectionOrder: ["personalInfo", "summary", "experience", "education", "skills", "achievements", "certifications", "awards", "publications"],
+    accentColor: "#2563eb",
+  });
+
+  const availableSections = ["personalInfo", "summary", "experience", "education", "skills", "achievements", "certifications", "awards", "publications"];
+
   const handleDownload = async () => {
     try {
       await generatePDF(resumeData, "experienced");
@@ -125,16 +136,40 @@ const ExperiencedBuilder = () => {
           </div>
         )}
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            <ExperiencedResumeForm 
-              resumeData={resumeData} 
-              setResumeData={setResumeData}
-            />
+        <div className="grid lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-1 space-y-6">
+            <Tabs defaultValue="content" className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="content">Content</TabsTrigger>
+                <TabsTrigger value="design">
+                  <Palette className="w-4 h-4 mr-1" />
+                  Design
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="content" className="space-y-6">
+                <ExperiencedResumeForm 
+                  resumeData={resumeData} 
+                  setResumeData={setResumeData}
+                />
+              </TabsContent>
+              
+              <TabsContent value="design">
+                <TemplateCustomizer
+                  customization={customization}
+                  onChange={setCustomization}
+                  availableSections={availableSections}
+                />
+              </TabsContent>
+            </Tabs>
           </div>
           
-          <div className="lg:sticky lg:top-24 h-fit">
-            <ResumePreview resumeData={resumeData} type="experienced" />
+          <div className="lg:col-span-2 lg:sticky lg:top-24 h-fit">
+            <CustomizableResumePreview 
+              resumeData={resumeData} 
+              type="experienced" 
+              customization={customization}
+            />
           </div>
         </div>
       </div>
