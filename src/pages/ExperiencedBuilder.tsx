@@ -3,10 +3,11 @@ import { Header } from "@/components/layout/Header";
 import { ExperiencedResumeForm } from "@/components/resume/ExperiencedResumeForm";
 import { ResumePreview } from "@/components/resume/ResumePreview";
 import { Button } from "@/components/ui/button";
-import { Download, BarChart3 } from "lucide-react";
+import { Download, BarChart3, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { generatePDF } from "@/utils/pdfGenerator";
 import { ATSScore } from "@/components/resume/ATSScore";
+import { useNavigate } from "react-router-dom";
 
 export interface ExperiencedResumeData {
   personalInfo: {
@@ -47,6 +48,7 @@ export interface ExperiencedResumeData {
 
 const ExperiencedBuilder = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [showATSScore, setShowATSScore] = useState(false);
   const [resumeData, setResumeData] = useState<ExperiencedResumeData>({
     personalInfo: {
@@ -86,6 +88,10 @@ const ExperiencedBuilder = () => {
     }
   };
 
+  const switchToFresher = () => {
+    navigate("/fresher");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
@@ -99,6 +105,10 @@ const ExperiencedBuilder = () => {
         </div>
 
         <div className="flex justify-center mb-6 space-x-4 flex-wrap gap-2">
+          <Button onClick={switchToFresher} variant="outline">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Switch to Fresher
+          </Button>
           <Button onClick={() => setShowATSScore(!showATSScore)} variant="outline">
             <BarChart3 className="mr-2 h-4 w-4" />
             ATS Score

@@ -1,12 +1,12 @@
-
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { ResumeForm } from "@/components/resume/ResumeForm";
 import { ResumePreview } from "@/components/resume/ResumePreview";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { Download, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { generatePDF } from "@/utils/pdfGenerator";
+import { useNavigate } from "react-router-dom";
 
 export interface FresherResumeData {
   personalInfo: {
@@ -49,6 +49,8 @@ export interface FresherResumeData {
 
 const FresherBuilder = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  
   const [resumeData, setResumeData] = useState<FresherResumeData>({
     personalInfo: {
       fullName: "",
@@ -89,6 +91,10 @@ const FresherBuilder = () => {
     }
   };
 
+  const switchToProfessional = () => {
+    navigate("/experienced");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
@@ -101,7 +107,11 @@ const FresherBuilder = () => {
           </p>
         </div>
 
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-6 space-x-4 flex-wrap gap-2">
+          <Button onClick={switchToProfessional} variant="outline">
+            <ArrowRight className="mr-2 h-4 w-4" />
+            Switch to Professional
+          </Button>
           <Button onClick={handleDownload}>
             <Download className="mr-2 h-4 w-4" />
             Download PDF

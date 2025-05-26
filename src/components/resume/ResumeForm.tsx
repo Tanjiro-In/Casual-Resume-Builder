@@ -1,10 +1,10 @@
-
 import React from "react";
 import { PersonalInfoForm } from "./forms/PersonalInfoForm";
 import { EducationForm } from "./forms/EducationForm";
 import { InternshipsForm } from "./forms/InternshipsForm";
 import { SkillsForm } from "./forms/SkillsForm";
 import { CertificationsForm } from "./forms/CertificationsForm";
+import { ProjectsFormWithAI } from "./forms/ProjectsFormWithAI";
 
 interface PersonalInfo {
   fullName: string;
@@ -46,6 +46,7 @@ interface ResumeData {
   skills: Skills;
   internships: Internship[];
   certifications: Certification[];
+  projects: any[];
 }
 
 interface ResumeFormProps {
@@ -83,6 +84,10 @@ export function ResumeForm({
     onChange({ ...resumeData, certifications });
   };
 
+  const updateProjects = (projects: any[]) => {
+    onChange({ ...resumeData, projects });
+  };
+
   return (
     <div className="space-y-6">
       <PersonalInfoForm
@@ -96,6 +101,11 @@ export function ResumeForm({
           gpa: edu.gpa || ""
         }))}
         onChange={updateEducation}
+      />
+
+      <ProjectsFormWithAI
+        projects={resumeData.projects || []}
+        onChange={updateProjects}
       />
 
       <InternshipsForm

@@ -17,15 +17,6 @@ export function Header() {
               ResumeBuilder
             </span>
           </Link>
-          
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link to="/fresher" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">
-              Fresher
-            </Link>
-            <Link to="/experienced" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">
-              Professional
-            </Link>
-          </nav>
 
           <Button
             variant="ghost"
