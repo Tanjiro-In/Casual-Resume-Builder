@@ -76,7 +76,7 @@ const ExperiencedBuilder = () => {
 
   const [customization, setCustomization] = useState<TemplateCustomization>({
     style: "modern",
-    font: "inter",
+    font: "calibri",
     sectionOrder: ["personalInfo", "summary", "experience", "education", "skills", "achievements", "certifications", "awards", "publications"],
     accentColor: "#2563eb",
   });

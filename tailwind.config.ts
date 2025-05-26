@@ -20,10 +20,11 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'sans': ['Inter', 'system-ui', 'sans-serif'],
-				'roboto': ['Roboto', 'sans-serif'],
-				'serif': ['Playfair Display', 'serif'],
-				'opensans': ['Open Sans', 'sans-serif'],
+				'sans': ['Calibri', 'Arial', 'system-ui', 'sans-serif'],
+				'calibri': ['Calibri', 'sans-serif'],
+				'arial': ['Arial', 'sans-serif'],
+				'times': ['Times New Roman', 'serif'],
+				'cambria': ['Cambria', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

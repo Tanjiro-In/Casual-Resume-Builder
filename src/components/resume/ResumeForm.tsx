@@ -1,5 +1,8 @@
+
 import React from "react";
 import { PersonalInfoForm } from "./forms/PersonalInfoForm";
+import { SummaryForm } from "./forms/SummaryForm";
+import { ObjectiveForm } from "./forms/ObjectiveForm";
 import { EducationForm } from "./forms/EducationForm";
 import { InternshipsForm } from "./forms/InternshipsForm";
 import { SkillsForm } from "./forms/SkillsForm";
@@ -42,6 +45,8 @@ interface Certification {
 
 interface ResumeData {
   personalInfo: PersonalInfo;
+  summary?: string;
+  objective?: string;
   education: Education[];
   skills: Skills;
   internships: Internship[];
@@ -62,6 +67,14 @@ export function ResumeForm({
 }: ResumeFormProps) {
   const updatePersonalInfo = (personalInfo: PersonalInfo) => {
     onChange({ ...resumeData, personalInfo });
+  };
+
+  const updateSummary = (summary: string) => {
+    onChange({ ...resumeData, summary });
+  };
+
+  const updateObjective = (objective: string) => {
+    onChange({ ...resumeData, objective });
   };
 
   const updateEducation = (education: Education[]) => {
@@ -94,6 +107,20 @@ export function ResumeForm({
         personalInfo={resumeData.personalInfo}
         onChange={updatePersonalInfo}
       />
+
+      {type === "fresher" && (
+        <SummaryForm
+          summary={resumeData.summary || ""}
+          onChange={updateSummary}
+        />
+      )}
+
+      {type === "fresher" && (
+        <ObjectiveForm
+          objective={resumeData.objective || ""}
+          onChange={updateObjective}
+        />
+      )}
       
       <EducationForm
         education={resumeData.education.map(edu => ({

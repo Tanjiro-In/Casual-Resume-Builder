@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,10 +24,10 @@ export function CustomizableResumePreview({
 
   // Font class mapping
   const fontClasses = {
-    inter: "font-sans",
-    roboto: "font-sans",
-    playfair: "font-serif",
-    opensans: "font-sans",
+    calibri: "font-calibri",
+    arial: "font-arial",
+    times: "font-times",
+    cambria: "font-cambria",
   };
 
   // Style configurations
@@ -39,8 +38,8 @@ export function CustomizableResumePreview({
       sectionSpacing: "mb-8",
     },
     classic: {
-      headerBg: "bg-white dark:bg-gray-900",
-      cardClass: "shadow-md border",
+      headerBg: "bg-white dark:bg-gray-900 border-b-2",
+      cardClass: "shadow-md border-2",
       sectionSpacing: "mb-6",
     },
     minimal: {
@@ -53,6 +52,26 @@ export function CustomizableResumePreview({
       cardClass: "shadow-xl border-0 rounded-xl",
       sectionSpacing: "mb-8",
     },
+    elegant: {
+      headerBg: "bg-gradient-to-r from-gray-50 to-slate-100 dark:from-gray-800 dark:to-slate-800",
+      cardClass: "shadow-lg border border-gray-200 dark:border-gray-700",
+      sectionSpacing: "mb-8",
+    },
+    professional: {
+      headerBg: "bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700",
+      cardClass: "shadow-md border border-gray-300 dark:border-gray-600",
+      sectionSpacing: "mb-6",
+    },
+    bold: {
+      headerBg: "bg-gradient-to-r from-slate-900 to-gray-800 text-white",
+      cardClass: "shadow-xl border-2 border-gray-800",
+      sectionSpacing: "mb-8",
+    },
+    compact: {
+      headerBg: "bg-gray-100 dark:bg-gray-800",
+      cardClass: "shadow-sm border",
+      sectionSpacing: "mb-4",
+    },
   };
 
   const currentStyle = styleConfig[customization.style];
@@ -63,11 +82,11 @@ export function CustomizableResumePreview({
       case "personalInfo":
         return (
           <div className={`text-center ${currentStyle.sectionSpacing}`}>
-            <div className={`p-6 rounded-lg ${currentStyle.headerBg}`}>
-              <h1 className={`text-3xl font-bold mb-2 ${fontClass}`} style={{ color: customization.accentColor }}>
+            <div className={`p-6 rounded-lg ${currentStyle.headerBg} ${customization.style === 'bold' ? 'text-white' : ''}`}>
+              <h1 className={`text-3xl font-bold mb-2 ${fontClass}`} style={{ color: customization.style === 'bold' ? 'white' : customization.accentColor }}>
                 {resumeData.personalInfo.fullName || "Your Name"}
               </h1>
-              <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600 dark:text-gray-300">
+              <div className={`flex flex-wrap justify-center gap-4 text-sm ${customization.style === 'bold' ? 'text-gray-200' : 'text-gray-600 dark:text-gray-300'}`}>
                 {resumeData.personalInfo.email && (
                   <div className="flex items-center gap-1">
                     <Mail className="h-4 w-4" />
@@ -103,6 +122,23 @@ export function CustomizableResumePreview({
           </div>
         );
 
+      case "summary":
+        if ((isFresher && fresherData.summary) || (!isFresher && experiencedData.summary)) {
+          const summaryText = isFresher ? fresherData.summary : experiencedData.summary;
+          return (
+            <div className={currentStyle.sectionSpacing}>
+              <h2 className={`text-xl font-semibold mb-3 ${fontClass}`} style={{ color: customization.accentColor }}>
+                Professional Summary
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                {summaryText}
+              </p>
+              <Separator className="mt-4" />
+            </div>
+          );
+        }
+        return null;
+
       case "objective":
         if (isFresher && fresherData.objective) {
           return (
@@ -112,22 +148,6 @@ export function CustomizableResumePreview({
               </h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 {fresherData.objective}
-              </p>
-              <Separator className="mt-4" />
-            </div>
-          );
-        }
-        return null;
-
-      case "summary":
-        if (!isFresher && experiencedData.summary) {
-          return (
-            <div className={currentStyle.sectionSpacing}>
-              <h2 className={`text-xl font-semibold mb-3 ${fontClass}`} style={{ color: customization.accentColor }}>
-                Professional Summary
-              </h2>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                {experiencedData.summary}
               </p>
               <Separator className="mt-4" />
             </div>

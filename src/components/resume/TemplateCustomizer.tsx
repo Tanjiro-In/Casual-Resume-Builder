@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Palette, Type, List, ChevronUp, ChevronDown } from "lucide-react";
 
 export interface TemplateCustomization {
-  style: "modern" | "classic" | "minimal" | "creative";
-  font: "inter" | "roboto" | "playfair" | "opensans";
+  style: "modern" | "classic" | "minimal" | "creative" | "elegant" | "professional" | "bold" | "compact";
+  font: "calibri" | "arial" | "times" | "cambria";
   sectionOrder: string[];
   accentColor: string;
 }
@@ -24,13 +24,17 @@ const templateStyles = [
   { value: "classic", label: "Classic", description: "Traditional professional" },
   { value: "minimal", label: "Minimal", description: "Simple and elegant" },
   { value: "creative", label: "Creative", description: "Colorful and dynamic" },
+  { value: "elegant", label: "Elegant", description: "Sophisticated design" },
+  { value: "professional", label: "Professional", description: "Corporate standard" },
+  { value: "bold", label: "Bold", description: "Strong visual impact" },
+  { value: "compact", label: "Compact", description: "Space-efficient layout" },
 ];
 
 const fontOptions = [
-  { value: "inter", label: "Inter", description: "Modern sans-serif" },
-  { value: "roboto", label: "Roboto", description: "Clean and readable" },
-  { value: "playfair", label: "Playfair Display", description: "Elegant serif" },
-  { value: "opensans", label: "Open Sans", description: "Friendly sans-serif" },
+  { value: "calibri", label: "Calibri", description: "Modern and readable" },
+  { value: "arial", label: "Arial", description: "Clean sans-serif" },
+  { value: "times", label: "Times New Roman", description: "Classic serif" },
+  { value: "cambria", label: "Cambria", description: "Contemporary serif" },
 ];
 
 const accentColors = [
@@ -40,6 +44,8 @@ const accentColors = [
   { value: "#7c3aed", label: "Purple", class: "bg-violet-600" },
   { value: "#ea580c", label: "Orange", class: "bg-orange-600" },
   { value: "#0891b2", label: "Cyan", class: "bg-cyan-600" },
+  { value: "#1f2937", label: "Gray", class: "bg-gray-800" },
+  { value: "#be185d", label: "Pink", class: "bg-pink-600" },
 ];
 
 export function TemplateCustomizer({ customization, onChange, availableSections }: TemplateCustomizerProps) {

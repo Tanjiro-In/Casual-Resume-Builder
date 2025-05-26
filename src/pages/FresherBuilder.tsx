@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { ResumeForm } from "@/components/resume/ResumeForm";
@@ -19,6 +20,7 @@ export interface FresherResumeData {
     linkedin: string;
     portfolio: string;
   };
+  summary: string;
   objective: string;
   education: {
     degree: string;
@@ -62,6 +64,7 @@ const FresherBuilder = () => {
       linkedin: "",
       portfolio: "",
     },
+    summary: "",
     objective: "",
     education: [],
     skills: {
@@ -75,12 +78,12 @@ const FresherBuilder = () => {
 
   const [customization, setCustomization] = useState<TemplateCustomization>({
     style: "modern",
-    font: "inter",
-    sectionOrder: ["personalInfo", "objective", "education", "projects", "internships", "skills", "certifications"],
+    font: "calibri",
+    sectionOrder: ["personalInfo", "summary", "objective", "education", "projects", "internships", "skills", "certifications"],
     accentColor: "#2563eb",
   });
 
-  const availableSections = ["personalInfo", "objective", "education", "projects", "internships", "skills", "certifications"];
+  const availableSections = ["personalInfo", "summary", "objective", "education", "projects", "internships", "skills", "certifications"];
 
   const handleResumeChange = (data: any) => {
     setResumeData(data);
