@@ -1,4 +1,3 @@
-
 import React from "react";
 import { PersonalInfoForm } from "./forms/PersonalInfoForm";
 import { SummaryForm } from "./forms/SummaryForm";
@@ -69,10 +68,6 @@ export function ResumeForm({
     onChange({ ...resumeData, personalInfo });
   };
 
-  const updateSummary = (summary: string) => {
-    onChange({ ...resumeData, summary });
-  };
-
   const updateObjective = (objective: string) => {
     onChange({ ...resumeData, objective });
   };
@@ -107,13 +102,6 @@ export function ResumeForm({
         personalInfo={resumeData.personalInfo}
         onChange={updatePersonalInfo}
       />
-
-      {type === "fresher" && (
-        <SummaryForm
-          summary={resumeData.summary || ""}
-          onChange={updateSummary}
-        />
-      )}
 
       {type === "fresher" && (
         <ObjectiveForm

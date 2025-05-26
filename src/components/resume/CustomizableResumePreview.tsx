@@ -28,6 +28,12 @@ export function CustomizableResumePreview({
     arial: "font-arial",
     times: "font-times",
     cambria: "font-cambria",
+    georgia: "font-georgia",
+    verdana: "font-verdana",
+    tahoma: "font-tahoma",
+    trebuchet: "font-trebuchet",
+    palatino: "font-palatino",
+    garamond: "font-garamond",
   };
 
   // Style configurations
@@ -123,15 +129,14 @@ export function CustomizableResumePreview({
         );
 
       case "summary":
-        if ((isFresher && fresherData.summary) || (!isFresher && experiencedData.summary)) {
-          const summaryText = isFresher ? fresherData.summary : experiencedData.summary;
+        if (!isFresher && experiencedData.summary) {
           return (
             <div className={currentStyle.sectionSpacing}>
               <h2 className={`text-xl font-semibold mb-3 ${fontClass}`} style={{ color: customization.accentColor }}>
                 Professional Summary
               </h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                {summaryText}
+                {experiencedData.summary}
               </p>
               <Separator className="mt-4" />
             </div>

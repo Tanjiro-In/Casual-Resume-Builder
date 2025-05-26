@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { ResumeForm } from "@/components/resume/ResumeForm";
@@ -79,11 +78,11 @@ const FresherBuilder = () => {
   const [customization, setCustomization] = useState<TemplateCustomization>({
     style: "modern",
     font: "calibri",
-    sectionOrder: ["personalInfo", "summary", "objective", "education", "projects", "internships", "skills", "certifications"],
+    sectionOrder: ["personalInfo", "objective", "education", "projects", "internships", "skills", "certifications"],
     accentColor: "#2563eb",
   });
 
-  const availableSections = ["personalInfo", "summary", "objective", "education", "projects", "internships", "skills", "certifications"];
+  const availableSections = ["personalInfo", "objective", "education", "projects", "internships", "skills", "certifications"];
 
   const handleResumeChange = (data: any) => {
     setResumeData(data);

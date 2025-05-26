@@ -25,6 +25,12 @@ export default {
 				'arial': ['Arial', 'sans-serif'],
 				'times': ['Times New Roman', 'serif'],
 				'cambria': ['Cambria', 'serif'],
+				'georgia': ['Georgia', 'serif'],
+				'verdana': ['Verdana', 'sans-serif'],
+				'tahoma': ['Tahoma', 'sans-serif'],
+				'trebuchet': ['Trebuchet MS', 'sans-serif'],
+				'palatino': ['Palatino', 'serif'],
+				'garamond': ['Garamond', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

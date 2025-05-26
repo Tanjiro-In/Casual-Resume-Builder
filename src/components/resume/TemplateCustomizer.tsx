@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -8,7 +7,7 @@ import { Palette, Type, List, ChevronUp, ChevronDown } from "lucide-react";
 
 export interface TemplateCustomization {
   style: "modern" | "classic" | "minimal" | "creative" | "elegant" | "professional" | "bold" | "compact";
-  font: "calibri" | "arial" | "times" | "cambria";
+  font: "calibri" | "arial" | "times" | "cambria" | "georgia" | "verdana" | "tahoma" | "trebuchet" | "palatino" | "garamond";
   sectionOrder: string[];
   accentColor: string;
 }
@@ -35,6 +34,12 @@ const fontOptions = [
   { value: "arial", label: "Arial", description: "Clean sans-serif" },
   { value: "times", label: "Times New Roman", description: "Classic serif" },
   { value: "cambria", label: "Cambria", description: "Contemporary serif" },
+  { value: "georgia", label: "Georgia", description: "Elegant serif" },
+  { value: "verdana", label: "Verdana", description: "Highly legible sans-serif" },
+  { value: "tahoma", label: "Tahoma", description: "Compact sans-serif" },
+  { value: "trebuchet", label: "Trebuchet MS", description: "Humanist sans-serif" },
+  { value: "palatino", label: "Palatino", description: "Classical serif" },
+  { value: "garamond", label: "Garamond", description: "Traditional serif" },
 ];
 
 const accentColors = [
